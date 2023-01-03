@@ -21,7 +21,9 @@ class SimpleQueue<T> implements IQueue<T> {
 
     public function enqueue(item:T) {
         items.push(item);
-        processQueue();
+        if (items.length == 1) {
+            processQueue();
+        }
     }
 
     private var _processingItem:Bool = false;
