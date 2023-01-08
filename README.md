@@ -32,7 +32,7 @@ var queue:IQueue<Int> = QueueFactory.instance.createQueue(QueueFactory.SIMPLE_QU
 ```
 
 # non queue
-This isnt actually a queue but can be used when an interface for a queue is required (for example its the default in the http request queue). This "queue" simply dispatches items as they come in, there is nothing sequential about this at all. It is _not_ a queue
+This isnt actually a queue but can be used when an interface for a queue is required (for example its the default in the http request queue). This "queue" simply dispatches items as they come in, there is nothing sequential about this at all. ***It is _not_ a queue***
 
 ```haxe
 var queue:IQueue<Int> = QueueFactory.instance.createQueue(QueueFactory.NON_QUEUE);
