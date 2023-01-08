@@ -4,17 +4,17 @@ pluggable queue abstraction
 # basic usage
 
 ```haxe
-q.onMessage = (item:Int) -> {
+queue.onMessage = (item:Int) -> {
     return new Promise((resolve, reject) -> {
         trace("got item", item);
         item++;
         if (item == 31) {
-            q.requeue(item, 1000); // requeue with 1s delay
+            queue.requeue(item, 1000); // requeue with 1s delay
         }
         resolve(true); // ack
     });
 }
-q.start().then(success -> {
+queue.start().then(success -> {
     q.enqueue(10);
     q.enqueue(20);
     q.enqueue(30);
