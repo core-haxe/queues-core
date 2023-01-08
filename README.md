@@ -25,7 +25,7 @@ queue.start().then(success -> {
 
 # simple queue
 
-This is the most basic queue, it will dispatch items seqentually waiting for an ack or nack before dispatching the second. This is purely an internal implementation for simple things (like making sure http requests are "in order" when dealing with nonces for example)
+This is the most basic queue, it will dispatch items seqentually waiting for an ack or nack before dispatching the next item. This is purely an internal implementation for simple things (like making sure http requests are "in order" when dealing with nonces for example)
 
 ```haxe
 var queue:IQueue<Int> = QueueFactory.instance.createQueue(QueueFactory.SIMPLE_QUEUE);
