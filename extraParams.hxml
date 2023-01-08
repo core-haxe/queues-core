@@ -1,0 +1,3 @@
+--macro queues.macros.QueueTypes.register("simple-queue", "queues.SimpleQueue")
+--macro queues.macros.QueueTypes.register("non-queue", "queues.NonQueue")
+
