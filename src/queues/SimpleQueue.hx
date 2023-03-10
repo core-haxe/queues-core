@@ -37,7 +37,7 @@ class SimpleQueue<T> implements IQueue<T> {
     }
 
     public function requeue(item:T, delay:Null<Int> = null) {
-        if (delay == null && delay > 0) {
+        if (delay == null || delay == 0) {
             enqueue(item);
         } else {
             haxe.Timer.delay(() -> {
