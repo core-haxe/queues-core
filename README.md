@@ -4,17 +4,17 @@ pluggable queue abstraction
 # basic usage
 
 ```haxe
-q.onMessage = (item:Int) -> {
+queue.onMessage = (item:Int) -> {
     return new Promise((resolve, reject) -> {
         trace("got item", item);
         item++;
         if (item == 31) {
-            q.requeue(item, 1000); // requeue with 1s delay
+            queue.requeue(item, 1000); // requeue with 1s delay
         }
         resolve(true); // ack
     });
 }
-q.start().then(success -> {
+queue.start().then(success -> {
     q.enqueue(10);
     q.enqueue(20);
     q.enqueue(30);
@@ -25,14 +25,14 @@ q.start().then(success -> {
 
 # simple queue
 
-This is the most basic queue, it will dispatch items seqentually waiting for an ack or nack before dispatching the second. This is purely an internal implementation for simple things (like making sure http requests are "in order" when dealing with nonces for example)
+This is the most basic queue, it will dispatch items seqentually waiting for an ack or nack before dispatching the next item. This is purely an internal implementation for simple things (like making sure http requests are "in order" when dealing with nonces for example)
 
 ```haxe
 var queue:IQueue<Int> = QueueFactory.instance.createQueue(QueueFactory.SIMPLE_QUEUE);
 ```
 
 # non queue
-This isnt actually a queue but can be used when an interface for a queue is required (for example its the default in the http request queue). This "queue" simply dispatches items as they come in, there is nothing sequential about this at all. It is _not_ a queue
+This isnt actually a queue but can be used when an interface for a queue is required (for example its the default in the http request queue). This "queue" simply dispatches items as they come in, there is nothing sequential about this at all. ***It is _not_ a queue***
 
 ```haxe
 var queue:IQueue<Int> = QueueFactory.instance.createQueue(QueueFactory.NON_QUEUE);
