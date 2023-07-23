@@ -8,6 +8,16 @@ class NonQueue<T> implements IQueue<T> {
     public function new() {
     }
 
+    private var _name:String = null;
+    public var name(get, set):String;
+    private function get_name() {
+        return _name;
+    }
+    private function set_name(value:String):String {
+        _name = value;
+        return value;
+    }
+
     private var _onMessage:T->Promise<Bool>;
     public var onMessage(get, set):T->Promise<Bool>;
     private function get_onMessage():T->Promise<Bool> {
@@ -24,6 +34,12 @@ class NonQueue<T> implements IQueue<T> {
     }
 
     public function start():Promise<Bool> {
+        return new Promise((resolve, reject) -> {
+            resolve(true);
+        });
+    }
+
+    public function stop():Promise<Bool> {
         return new Promise((resolve, reject) -> {
             resolve(true);
         });
