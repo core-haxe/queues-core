@@ -13,7 +13,9 @@ class QueueTypes {
         var parts = c.split(".");
         var name = parts.pop();
         // lets just make sure it exists
-        Context.resolveType(TPath({pack: parts, name: name, params: [TPType(TPath({pack: [], name: "Dynamic"}))]}), Context.currentPos());
+        Context.onAfterInitMacros(() -> {
+            Context.resolveType(TPath({pack: parts, name: name, params: [TPType(TPath({pack: [], name: "Dynamic"}))]}), Context.currentPos());
+        });
         if (!typeClasses.exists(id)) {
             typeClasses.set(id, c);
         }
