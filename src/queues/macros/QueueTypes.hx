@@ -13,9 +13,13 @@ class QueueTypes {
         var parts = c.split(".");
         var name = parts.pop();
         // lets just make sure it exists
+        #if (haxe >= version("4.3.0"))
         Context.onAfterInitMacros(() -> {
             Context.resolveType(TPath({pack: parts, name: name, params: [TPType(TPath({pack: [], name: "Dynamic"}))]}), Context.currentPos());
         });
+        #else
+        Context.resolveType(TPath({pack: parts, name: name, params: [TPType(TPath({pack: [], name: "Dynamic"}))]}), Context.currentPos());
+        #end
         if (!typeClasses.exists(id)) {
             typeClasses.set(id, c);
         }
