@@ -29,6 +29,17 @@ class NonQueue<T> implements IQueue<T> {
         return value;
     }
 
+    private var _onMessageWithProperties:T->Map<String, Any>->Promise<Bool>;
+    public var onMessageWithProperties(get, set):T->Map<String, Any>->Promise<Bool>;
+    private function get_onMessageWithProperties():T->Map<String, Any>->Promise<Bool> {
+        return _onMessageWithProperties;
+    }
+    private function set_onMessageWithProperties(value:T->Map<String, Any>->Promise<Bool>):T->Map<String, Any>->Promise<Bool> {
+        _onMessageWithProperties = value;
+        processQueue();
+        return value;
+    }
+
     public function config(config:Dynamic) {
         // no config
     }
@@ -45,7 +56,7 @@ class NonQueue<T> implements IQueue<T> {
         });
     }
 
-    public function enqueue(item:T) {
+    public function enqueue(item:T, properties:Map<String, Any> = null) {
         items.push(item);
         processQueue();
     }

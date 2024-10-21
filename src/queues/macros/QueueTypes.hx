@@ -9,7 +9,7 @@ class QueueTypes {
     private static var typeClasses:Map<String, String> = [];
 
     macro static function register(id:String, c:String) {
-        Sys.println('registering queue type ${c} (${id})');
+        Sys.println('queues-core > registering queue type ${c} (${id})');
         var parts = c.split(".");
         var name = parts.pop();
         // lets just make sure it exists
