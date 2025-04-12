@@ -8,6 +8,7 @@ import utest.ITest;
 import utest.Async;
 import utest.Assert;
 import queues.IQueue;
+import rabbitmq.RabbitMQError;
 
 @:timeout(20000)
 class TestBasic implements ITest {
@@ -42,8 +43,13 @@ class TestBasic implements ITest {
             return ConnectionManager.instance.closeAll();
         }).then(_ -> {
             async.done();
-        }, error -> {
-            trace(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", error);
+        }, (error:Dynamic) -> {
+            if (error is RabbitMQError) {
+                var rmqError:RabbitMQError = cast error;
+                trace(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", rmqError.message);
+            } else {
+                trace(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> ", error);
+            }
             async.done();
         });
     }
@@ -56,6 +62,7 @@ class TestBasic implements ITest {
                 async.done();
             });
         }
+
         producer.enqueue("foo-message");
     }
 }

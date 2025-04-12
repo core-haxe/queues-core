@@ -1,0 +1,8 @@
+common.hxml
+
+--library php-amq-lib
+
+-D local
+
+--php build/php/
+#--cmd php build/php/index.php
