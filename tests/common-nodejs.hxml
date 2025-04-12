@@ -1,0 +1,12 @@
+--class-path .
+--main TestAll
+
+-lib utest
+-lib hxnodejs
+-lib queues-core
+-lib queues-rabbitmq
+-lib serializers
+-lib logging
+
+-D no-deprecation-warnings
+-D allow-raw
